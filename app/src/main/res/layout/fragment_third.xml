@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ThirdFragment">
+
+    <TextView
+        android:id="@+id/Tentang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Tentang Noter"
+        android:textSize="28dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:paddingVertical="12dp"
+        android:layout_margin="24dp"
+        />
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/Tentang"
+        />
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Notes merupakan aplikasi catatan digitan sederhana"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/logo"
+        android:layout_marginVertical="52dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textAlignment="center"
+        />
+    <TextView
+        android:id="@+id/dibuat"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:text="Aplikasi ini dibuat oleh: Saeful Anwar 10119094"
+        android:layout_marginBottom="24dp"
+        />
+
+</RelativeLayout>
