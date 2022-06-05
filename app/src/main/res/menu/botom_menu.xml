@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/firstFragment"
-        android:title="Notes"
+        android:title="Catatan"
         android:icon="@drawable/ic_event_note"
         />
     <item
@@ -13,7 +13,7 @@
         />
     <item
         android:id="@+id/thirdFragment"
-        android:title="About App"
+        android:title="Tentang Apk"
         android:icon="@drawable/ic_android"
         />
 </menu>
