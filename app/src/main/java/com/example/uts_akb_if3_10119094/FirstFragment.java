@@ -90,13 +90,13 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemClickLi
 
         View fragment = inflater.inflate(R.layout.fragment_first, container, false);
 
-//        DBHelper db = new DBHelper(fragment.getContext());
-//        Cursor notes = db.oneData(id);
-//        RecyclerView recyclerView = fragment.findViewById(R.id.listNotes);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(fragment.getContext()));
-//        CustomCursorAdapter adapter = new CustomCursorAdapter(fragment.getContext(),notes);
-//
-//        recyclerView.setAdapter(adapter);
+        DBHelper db = new DBHelper(fragment.getContext());
+        List<Notes> notes = db.getNotes();
+        RecyclerView recyclerView = fragment.findViewById(R.id.listNotes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(fragment.getContext()));
+        NoteAdapter adapter = new NoteAdapter(fragment.getContext(),notes);
+
+        recyclerView.setAdapter(adapter);
 
         FloatingActionButton Addnote = fragment.findViewById(R.id.floatbtn);
         Addnote.setOnClickListener(new View.OnClickListener() {

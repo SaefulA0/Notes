@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String database_name = "db_note";
@@ -35,6 +38,48 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int x) {
         db.execSQL("DROP TABLE IF EXISTS " + table_name);
+    }
+
+    public Notes getNote(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(database_name, new String[]{row_id, row_title, row_note,
+                        row_created}, row_id+"=?",
+                new String[]{String.valueOf(id)}, null, null, null);
+
+        if(cursor.moveToFirst())
+        {
+            cursor.moveToFirst();
+        }
+
+        Notes note = new Notes(cursor.getLong(0), cursor.getString(1), cursor.getString(2),
+                cursor.getString(3));
+
+        return note;
+    }
+
+    public List<Notes> getNotes()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Notes> index = new ArrayList<>();
+
+        String query = "SELECT * FROM "+table_name;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                Notes note = new Notes();
+                note.setId(cursor.getLong(0));
+                note.setTitle(cursor.getString(1));
+                note.setDesc(cursor.getString(2));
+
+                index.add(note);
+
+            }while(cursor.moveToNext());
+        }
+
+        return index;
     }
 
     //get all SQLite data
