@@ -52,10 +52,10 @@ public class AddActivity extends AppCompatActivity {
 
                 //Create Condition
                 if(title.equals("") && desc.equals("")){
-                    Toast.makeText(AddActivity.this, "Nothing to save", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddActivity.this, "Gagal disimpan", Toast.LENGTH_LONG).show();
                 }else {
                     helper.insertData(values);
-                    Toast.makeText(AddActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddActivity.this, "Berhasil ditambah", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(AddActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);

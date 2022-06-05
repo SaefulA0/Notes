@@ -49,10 +49,10 @@ public class EditActivity extends AppCompatActivity {
                 values.put(DBHelper.row_note, desc);
 
                 if(title.equals("") && desc.equals("")){
-                    Toast.makeText(EditActivity.this, "Nothing to save Edit", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditActivity.this, "Gagal tersimpan", Toast.LENGTH_SHORT).show();
                 }else {
                     helper.updateData(values, id);
-                    Toast.makeText(EditActivity.this, "Saved", Toast.LENGTH_SHORT);
+                    Toast.makeText(EditActivity.this, "Tersimpan", Toast.LENGTH_SHORT);
                     Intent intent = new Intent(EditActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -65,19 +65,19 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
-                builder.setMessage("This note will delete");
+                builder.setMessage("Apakah kamu yakin ingin menghapus catatan ini?");
                 builder.setCancelable(true);
-                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         helper.deleteData(id);
-                        Toast.makeText(EditActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditActivity.this, "Berhasil dihapus", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(EditActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
