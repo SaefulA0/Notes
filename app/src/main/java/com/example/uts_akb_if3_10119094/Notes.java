@@ -38,7 +38,7 @@ public class Notes {
         return desc;
     }
 
-    public void setDesc(String body) {
+    public void setDesc(String desc) {
         this.desc = desc;
     }
 

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class EditActivity extends AppCompatActivity {
 
     DBHelper helper;
     EditText NotesTitle,NotesDesc;
+    Notes notes;
     long id;
 
     @Override
@@ -25,7 +27,7 @@ public class EditActivity extends AppCompatActivity {
 
         helper = new DBHelper(this);
 
-        id = getIntent().getLongExtra(DBHelper.row_id, 0);
+        id = getIntent().getLongExtra("id", 0);
 
         NotesTitle = (EditText)findViewById(R.id.NotesTitleEdit);
         NotesDesc = (EditText)findViewById(R.id.NotesDescEdit);
@@ -36,8 +38,8 @@ public class EditActivity extends AppCompatActivity {
         sveditbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = NotesTitle.getText().toString().trim();
-                String desc = NotesDesc.getText().toString().trim();
+                String title = NotesTitle.getText().toString();
+                String desc = NotesDesc.getText().toString();
 
                 ContentValues values = new ContentValues();
                 values.put(DBHelper.row_title, title);
@@ -48,7 +50,9 @@ public class EditActivity extends AppCompatActivity {
                 }else {
                     helper.updateData(values, id);
                     Toast.makeText(EditActivity.this, "Saved", Toast.LENGTH_SHORT);
-                    finish();
+                    Intent intent = new Intent(EditActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }
             }
         });
@@ -65,7 +69,9 @@ public class EditActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         helper.deleteData(id);
                         Toast.makeText(EditActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
-                        finish();
+                        Intent intent = new Intent(EditActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

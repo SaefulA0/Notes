@@ -3,6 +3,7 @@ package com.example.uts_akb_if3_10119094;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +27,6 @@ public class AddActivity extends AppCompatActivity {
 
         helper = new DBHelper(this);
 
-        id = getIntent().getLongExtra(DBHelper.row_id, 0);
-
         NotesTitle = (EditText)findViewById(R.id.NotesTitleAdd);
         NotesDesc = (EditText)findViewById(R.id.NotesDescAdd);
 
@@ -35,8 +34,8 @@ public class AddActivity extends AppCompatActivity {
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = NotesTitle.getText().toString().trim();
-                String desc = NotesDesc.getText().toString().trim();
+                String title = NotesTitle.getText().toString();
+                String desc = NotesDesc.getText().toString();
 
                 //get calender
                 Calendar calendar = Calendar.getInstance();
@@ -45,7 +44,7 @@ public class AddActivity extends AppCompatActivity {
 
                 ContentValues values = new ContentValues();
                 values.put(DBHelper.row_title, title);
-                values.put(DBHelper.row_note,desc);
+                values.put(DBHelper.row_note, desc);
                 values.put(DBHelper.row_created, created);
 
                 //Create Condition
@@ -54,7 +53,9 @@ public class AddActivity extends AppCompatActivity {
                 }else {
                     helper.insertData(values);
                     Toast.makeText(AddActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }
             }
         });

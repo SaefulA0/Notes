@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -39,6 +40,8 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemClickLi
     ArrayList<String> ListItem;
     ArrayAdapter adapter;
     long id;
+    View fragment;
+    Notes notes;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -88,7 +91,7 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View fragment = inflater.inflate(R.layout.fragment_first, container, false);
+        fragment = inflater.inflate(R.layout.fragment_first, container, false);
 
         DBHelper db = new DBHelper(fragment.getContext());
         List<Notes> notes = db.getNotes();
@@ -105,50 +108,32 @@ public class FirstFragment extends Fragment implements AdapterView.OnItemClickLi
                     toAddnote();
             }
         });
+
         return fragment;
 
-//        helper = new DBHelper(this);
-//        listView = (ListView)findViewById(R.id.listNotes);
-//        listView.setOnClickListener(this);
     }
 
     public void toAddnote(){
         Intent i = new Intent(getActivity(), AddActivity.class);
         startActivity(i);
     }
-//    public void setListView(){
-//        Cursor cursor = helper.allData();
-//        CustomCursorAdapter customCursorAdapter = new CustomCursorAdapter(getParentFragment().getActivity(), cursor, 1);
-//        listView.setAdapter(customCursorAdapter);
+//    public void ToEditnote(){
+//        Intent intent = new Intent(getActivity(), EditActivity.class);
+//        intent.putExtra("id", notes.getId());
+//        startActivity(intent);
 //    }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-//        ListView listView = (ListView)view.findViewById(R.id.listNotes);
-//        ArrayAdapter<String> adapter=new ArrayAdapter<>(getActivity(),R.layout.ctnnotes);
-//
-//        listView.setAdapter(adapter);
-//        listView.setOnClickListener(this);
-    }
-
-    @Override
     public void onItemClick(AdapterView<?> parent, View view, int i, long x) {
-        TextView getId = (TextView)view.findViewById(androidx.appcompat.R.id.list_item);
+        TextView getId = view.findViewById(R.id.listNotes);
         final long id = Long.parseLong(getId.getText().toString());
         Cursor cur = helper.oneData(id);
         cur.moveToFirst();
 
-//        Intent idnotes = new Intent(FirstFragment.this, EditActivity.class);
-//        idnotes.putExtra(DBHelper.row_id, id);
-//        startActivity(idnotes);
+        Intent intent = new Intent(fragment.getContext(), EditActivity.class);
+        intent.putExtra("id", notes.getId());
+        Toast.makeText(fragment.getContext(), "ID :"+ id, Toast.LENGTH_SHORT).show();
+        startActivity(intent);
     }
-
-//    @Override
-//    protected void onResume(){
-//        super.onResume();
-//        setListView();
-//    }
 
 }
